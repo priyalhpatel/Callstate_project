@@ -1,54 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".Display">
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/user"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:background="#eee9e9	"
+        app:srcCompat="@drawable/icon" />
 
     <TextView
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Name"
-        android:textStyle="bold"/>
+        android:drawableLeft="@drawable/ic_person"
+        android:drawablePadding="15dp"
+
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:text="Customer Name"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        />
 
     <TextView
-        android:id="@+id/dis_name"
+        android:id="@+id/cust_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:layout_marginLeft="50dp"
+        android:text="Textview"
+        android:textSize="18dp" />
 
     <TextView
-        android:id="@+id/State"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Call state"
-        android:textStyle="bold"/>
+        android:text="State"
+        android:layout_marginLeft="10dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:drawableLeft="@drawable/ic_phone"
+        android:drawablePadding="15dp"
+        />
+    <TextView
+        android:id="@+id/state"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:text="Textview"
+        android:textSize="18dp" />
 
     <TextView
-        android:id="@+id/dis_state"
+        android:id="@+id/select"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="Select Outcome"
+        android:layout_marginLeft="10dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:drawableLeft="@drawable/ic_select"
+        android:drawablePadding="15dp"
 
-    <TextView
-        android:id="@+id/feedback"
+        />
+    <Spinner
+        android:id="@+id/outcome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Get Feedback"
-        android:textStyle="bold"/>
-
+        android:entries="@array/outcomes"
+        android:layout_marginLeft="50dp"/>
     <EditText
-        android:id="@+id/dis_feed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="feedback" />
+        android:hint="Note"
+        android:textSize="25dp"
+        android:textColor="#483d8b"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
+        android:drawableLeft="@drawable/ic_note"
+        android:drawablePadding="15dp"
+        />
 
-    <Button
-        android:id="@+id/save"
-        android:layout_width="match_parent"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save" />
+        android:layout_gravity="end|bottom"
+        android:src="@drawable/ic_done"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="30dp"
+        app:backgroundTint="#008577"
+        />
+
+
+
+
 </LinearLayout>

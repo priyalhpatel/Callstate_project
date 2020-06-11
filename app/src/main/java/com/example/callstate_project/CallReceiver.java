@@ -58,7 +58,9 @@ public class CallReceiver extends BroadcastReceiver {
             state = TelephonyManager.CALL_STATE_RINGING;
         }
         if (phone_number == null || "".equals(phone_number)) {
+
             return;
+
         }
         customPhoneListener.onCallStateChanged(context, state, phone_number);
         Toast.makeText(context, "This is " +phone_number , Toast.LENGTH_SHORT).show();
@@ -68,9 +70,9 @@ public class CallReceiver extends BroadcastReceiver {
             Toast.makeText(context,"Match"+phone_number,Toast.LENGTH_LONG).show();
 
 
-
             Intent i = new Intent(context, Display.class);
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(i);
 
            /* Intent intent1 = ((Activity) context).getIntent();
             View view= (View) intent1.getCharSequenceExtra("view");

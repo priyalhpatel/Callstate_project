@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Callstate_project</string>
+    <string-array name="outcomes">
+        <item>Interested</item>
+        <item>Left Message</item>
+        <item>No Response</item>
+        <item>Not Interested</item>
+        <item>Not Able To Reached</item>
+        <item>Asked To Call</item>
+    </string-array>
+    <string name="FeedBack">FeedBack</string>
 </resources>
