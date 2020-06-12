@@ -3,6 +3,7 @@ package com.example.callstate_project;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,19 +11,28 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
+import android.widget.Filter;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 public class contactfetch extends AppCompatActivity {
     private static ListView contact_listview;
+
     private static ArrayList<Contact_Model> arrayList;
     private static Contact_Adapter adapter;
 
     private static ProgressDialog pd;
+
 
 
     @Override
@@ -33,6 +43,33 @@ public class contactfetch extends AppCompatActivity {
         contact_listview = (ListView) findViewById(R.id.contact_listview);
 
         new LoadContacts().execute();// Execute the async task
+
+        FloatingActionButton floatingActionButton=findViewById(R.id.add);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               // Toast.makeText(contactfetch.this,"add clicked ",Toast.LENGTH_LONG).show();
+                Intent i =new Intent(contactfetch.this,contactsave.class);
+                startActivity(i);
+            }
+        });
+        SearchView searchView = findViewById(R.id.searchcontect);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                adapter.notifyDataSetChanged();
+                return false;
+
+            }
+        });
+
+
     }
 
     private class LoadContacts extends AsyncTask<Void, Void, Void> {
@@ -59,6 +96,7 @@ public class contactfetch extends AppCompatActivity {
                 if (adapter == null) {
                     adapter = new Contact_Adapter(contactfetch.this, arrayList);
                     contact_listview.setAdapter(adapter);// set adapter
+
                 }
                 adapter.notifyDataSetChanged();
             } else {

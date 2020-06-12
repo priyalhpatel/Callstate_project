@@ -4,11 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".contactfetch">
+
+    <SearchView
+        android:id="@+id/searchcontect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:queryHint="Search Contact"
+        android:iconifiedByDefault="false"></SearchView>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|bottom"
+        android:src="@drawable/ic_add_black_24dp"
+        app:backgroundTint="#008577"
+        android:layout_marginRight="16dp"/>
 
     <ListView
         android:id="@+id/contact_listview"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
-    </ListView>
+        android:layout_height="fill_parent"
+
+        ></ListView>
+
+
 </LinearLayout>

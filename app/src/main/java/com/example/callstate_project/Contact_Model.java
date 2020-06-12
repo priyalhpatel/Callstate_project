@@ -38,4 +38,13 @@ public class Contact_Model {
     public String getContactOtherDetails() {
         return contactOtherDetails;
     }
+
+
+    public void setContactName(String contactName) {
+        this.contactName = contactName;
+    }
+
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
+    }
 }

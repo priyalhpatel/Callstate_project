@@ -3,18 +3,23 @@ package com.example.callstate_project;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class Contact_Adapter extends BaseAdapter {
+    public Filter getFilter;
     private Context context;
     private ArrayList<Contact_Model> arrayList;
+    private Filter Filter;
 
     public Contact_Adapter(Context context, ArrayList<Contact_Model> arrayList) {
         this.context = context;
@@ -61,7 +66,10 @@ public class Contact_Adapter extends BaseAdapter {
 
             convertView.setTag(holder);
         } else {
+
+
             holder = (ViewHodler) convertView.getTag();
+
         }
 
         // Set items to all view
@@ -124,6 +132,53 @@ public class Contact_Adapter extends BaseAdapter {
         return convertView;
     }
 
+
+
+    public Filter getFilter() {
+        if(Filter==null) {
+
+            Filter= new Filter() {
+                @Override
+                protected FilterResults performFiltering(CharSequence constraint) {
+
+                    /*FilterResults results=new FilterResults();
+                    if(constraint!=null && constraint.length()>0){
+                        ArrayList<Contact_Model> filterList=new ArrayList<Contact_Model>();
+                        for(int i=0;i<arrayList.size();i++){
+                            if((arrayList.get(i).getContactName().toUpperCase())
+                                    .contains(constraint.toString().toUpperCase())) {
+                                Contact_Model Contacts = new Contact_Model();
+                                Contacts.setContactName(arrayList.get(i).getContactName());
+                                Contacts.setContactNumber(arrayList.get(i).getContactNumber());
+                                filterList.add(Contacts);
+                            }
+                        }
+                        results.count=filterList.size();
+                        results.values=filterList;
+                    }else{
+                        results.count=arrayList.size();
+                        results.values=arrayList;
+                    }
+                    return results;*/
+                    return null;
+                }
+               // @SuppressWarnings("unchecked")
+                @Override
+                protected void publishResults(CharSequence constraint, FilterResults results) {
+                    //Contacts =(ArrayList<Contact_Model>) results.values;
+                    //notifyDataSetChanged();
+                }
+            };
+
+        }
+
+        return Filter;
+    }
+
+  /* public Filter getFilter() {
+        return null;
+    }
+*/
     // View holder to hold views
     private class ViewHodler {
         ImageView contactImage;
