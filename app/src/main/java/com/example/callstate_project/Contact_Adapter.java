@@ -141,25 +141,25 @@ public class Contact_Adapter extends BaseAdapter {
                 @Override
                 protected FilterResults performFiltering(CharSequence constraint) {
 
-                    /*FilterResults results=new FilterResults();
-                    if(constraint!=null && constraint.length()>0){
-                        ArrayList<Contact_Model> filterList=new ArrayList<Contact_Model>();
-                        for(int i=0;i<arrayList.size();i++){
-                            if((arrayList.get(i).getContactName().toUpperCase())
-                                    .contains(constraint.toString().toUpperCase())) {
-                                Contact_Model Contacts = new Contact_Model();
-                                Contacts.setContactName(arrayList.get(i).getContactName());
-                                Contacts.setContactNumber(arrayList.get(i).getContactNumber());
-                                filterList.add(Contacts);
-                            }
-                        }
-                        results.count=filterList.size();
-                        results.values=filterList;
-                    }else{
-                        results.count=arrayList.size();
-                        results.values=arrayList;
-                    }
-                    return results;*/
+                  // FilterResults results=new FilterResults();
+                    //if(constraint!=null && constraint.length()>0){
+                      //  ArrayList<Contact_Model> filterList=new ArrayList<Contact_Model>();
+                        //for(int i=0;i<arrayList.size();i++){
+                          //  if((arrayList.get(i).getContactName().toUpperCase())
+                            //        .contains(constraint.toString().toUpperCase())) {
+                              //  Contact_Model Contacts = new Contact_Model();
+                                //Contacts.setContactName(arrayList.get(i).getContactName());
+                                //Contacts.setContactNumber(arrayList.get(i).getContactNumber());
+                                //filterList.add(Contacts);
+                            //}
+                        //}
+                        //results.count=filterList.size();
+                        //results.values=filterList;
+                   // }else{
+                     //   results.count=arrayList.size();
+                       // results.values=arrayList;
+                    //}
+                    //return results;
                     return null;
                 }
                // @SuppressWarnings("unchecked")

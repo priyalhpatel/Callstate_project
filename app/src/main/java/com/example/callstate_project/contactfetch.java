@@ -64,7 +64,7 @@ public class contactfetch extends AppCompatActivity {
             public boolean onQueryTextChange(String newText) {
                 adapter.getFilter().filter(newText);
                 adapter.notifyDataSetChanged();
-                return false;
+                return true ;
 
             }
         });
