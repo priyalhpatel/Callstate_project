@@ -33,6 +33,7 @@ public class CallReceiver extends BroadcastReceiver {
     String p3="+919484507696";
     String p4="+919878472827";
 
+
     @Override
     public void onReceive(Context context, Intent intent) {
         TelephonyManager telephony = (TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
@@ -65,6 +66,7 @@ public class CallReceiver extends BroadcastReceiver {
 
         }
         customPhoneListener.onCallStateChanged(context, state, phone_number);
+
         Toast.makeText(context, "This is " +phone_number , Toast.LENGTH_SHORT).show();
 
 
@@ -78,8 +80,8 @@ public class CallReceiver extends BroadcastReceiver {
             context.startActivity(i);
 
 
-           String name = phone_number.getText().toString();
-            cust_name.setText(name);
+          // String name = phone_number.getText().toString();
+           // cust_name.setText(name);
 
         }
         else{

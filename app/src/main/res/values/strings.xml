@@ -9,4 +9,6 @@
         <item>Asked To Call</item>
     </string-array>
     <string name="FeedBack">FeedBack</string>
+<string name="Contactfetch">Contactfetch</string>
+    <string name="SaveContacts">SaveContacts</string>
 </resources>

@@ -2,8 +2,10 @@ package com.example.callstate_project;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,23 +21,58 @@ import io.realm.RealmResults;
 
 public class Display extends AppCompatActivity {
     EditText note;
-    TextView cust_name;
+    TextView dt_display,cust_name,state;
+    Button view;
     FloatingActionButton floatingActionButton;
      Realm realm;
-
+    String state1,number;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display);
           realm = Realm.getDefaultInstance();
 
-
+          cust_name=findViewById(R.id.cust_name);
+          state=findViewById(R.id.state);
+          view=findViewById(R.id.btn_view);
           note = findViewById(R.id.note);
          floatingActionButton = findViewById(R.id.fab);
+
+         Bundle extras=getIntent().getExtras();
+         state1=extras.getString("state1");
+         state.setText(state1);
+         number=extras.getString("number");
+         cust_name.setText(number);
+
+
+
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                  save();
+            }
+        });
+
+       view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                save();
+               RealmResults<Person> realmResults=realm.where(Person.class).findAll();
+
+                for(Person person: realmResults){
+                    //String data=note.getText().toString();
+                    //  i.putExtra("data",data);
+
+                  // dt_display.setText("");
+                   //dt_display.append(person.getFeedback());
+
+
+                }
+                Intent i = new Intent(Display.this,view.class);
+
+                startActivity(i);
+
             }
         });
     }
@@ -50,7 +87,13 @@ public class Display extends AppCompatActivity {
 
                 Person Person = realm.createObject(Person.class,newkey);
                 Person.setFeedback(note.getText().toString());
+               // Person.setState(state.getText().toString());
+               // Person.setName(cust_name.getText().toString());
 
+                //String feedback=note.getText().toString();
+               // Intent intent2=new Intent(Display.this,view.class);
+                //intent2.putExtra("feedback",feedback);
+               //startActivity(intent2);
             }
         }, new Realm.Transaction.OnSuccess() {
             @Override
@@ -64,6 +107,7 @@ public class Display extends AppCompatActivity {
             }
         });
     }
+
 
     @Override
     protected void onDestroy() {

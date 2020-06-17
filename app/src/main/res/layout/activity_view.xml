@@ -5,14 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".view">
 
     <TextView
-        android:id="@+id/display_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        />
-
-
+        android:id="@+id/dt_display"/>
 </LinearLayout>

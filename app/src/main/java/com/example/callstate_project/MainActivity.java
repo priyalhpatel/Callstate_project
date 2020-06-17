@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
         View view = getCurrentFocus();
         Intent intent =new Intent();
         intent.putExtra("view", (CharSequence) view);
+        //textView.findViewById(R.id.display_view);
+
     }
 
     private  boolean checkAndRequestPermissions() {
