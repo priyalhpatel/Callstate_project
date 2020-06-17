@@ -29,14 +29,12 @@ public class Display extends AppCompatActivity {
         setContentView(R.layout.activity_display);
           realm = Realm.getDefaultInstance();
 
-         // cust_name.setText("+phone_number");
 
-        note = findViewById(R.id.note);
+          note = findViewById(R.id.note);
          floatingActionButton = findViewById(R.id.fab);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  Toast.makeText(Display.this,"click",Toast.LENGTH_LONG).show();
                  save();
             }
         });

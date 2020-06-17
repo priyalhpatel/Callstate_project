@@ -34,7 +34,6 @@ public class contactfetch extends AppCompatActivity {
     private static ProgressDialog pd;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

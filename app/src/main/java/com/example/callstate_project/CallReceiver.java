@@ -27,7 +27,7 @@ import static androidx.core.content.ContextCompat.getCodeCacheDir;
 import static androidx.core.content.ContextCompat.getSystemService;
 
 public class CallReceiver extends BroadcastReceiver {
-    TextView textView;
+    TextView cust_name;
     String p1="+919429704118";
     String p2="+919427960325";
     String p3="+919484507696";
@@ -37,6 +37,8 @@ public class CallReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         TelephonyManager telephony = (TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
         MyPhoneStateListener customPhoneListener = new MyPhoneStateListener();
+
+
 
         telephony.listen(customPhoneListener, PhoneStateListener.LISTEN_CALL_STATE);
 
@@ -65,6 +67,7 @@ public class CallReceiver extends BroadcastReceiver {
         customPhoneListener.onCallStateChanged(context, state, phone_number);
         Toast.makeText(context, "This is " +phone_number , Toast.LENGTH_SHORT).show();
 
+
         if(phone_number.equals(p1)|| phone_number.equals(p2) || phone_number.equals(p3) || phone_number.equals(p4)){
 
             Toast.makeText(context,"Match"+phone_number,Toast.LENGTH_LONG).show();
@@ -74,9 +77,9 @@ public class CallReceiver extends BroadcastReceiver {
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(i);
 
-           /* Intent intent1 = ((Activity) context).getIntent();
-            View view= (View) intent1.getCharSequenceExtra("view");
-            showPopupWindow(view);*/
+
+           String name = phone_number.getText().toString();
+            cust_name.setText(name);
 
         }
         else{
