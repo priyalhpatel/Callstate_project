@@ -13,5 +13,6 @@ public class BaseApplication extends Application {
         Realm.init(this);
         RealmConfiguration config = new RealmConfiguration.Builder().build();
         Realm.setDefaultConfiguration(config);
+
     }
 }

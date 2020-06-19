@@ -32,16 +32,18 @@ public class MyPhoneStateListener extends PhoneStateListener {
             case TelephonyManager.CALL_STATE_RINGING:
                 isIncoming = true;
                 callStartTime = new Date();
+
                   state1= "Incoming call Ringing";
                   intent.putExtra("state1",state1);
                   context.startActivity(intent);
                 Toast.makeText(context, "Incoming Call Ringing " , Toast.LENGTH_SHORT).show();
+
                 break;
             case TelephonyManager.CALL_STATE_OFFHOOK:
                 if(lastState != TelephonyManager.CALL_STATE_RINGING){
                     isIncoming = false;
                     callStartTime = new Date();
-                    state1= "outgoing call Ringing";
+                    state1= "incoming call Ringing";
                     intent.putExtra("state1",state1);
                     context.startActivity(intent);
                     Toast.makeText(context, "Outgoing Call Started " +phoneNumber , Toast.LENGTH_SHORT).show();

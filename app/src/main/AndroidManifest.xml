@@ -26,10 +26,16 @@
         <activity android:name=".contactfetch"
             android:label="@string/Contactfetch">
 
+
         </activity>
         <activity android:name=".contactsave"
-            android:label="@string/SaveContacts"/>
+            android:label="@string/SaveContacts">
+
+
+        </activity>
+
         <activity android:name=".MainActivity" >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

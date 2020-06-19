@@ -25,7 +25,7 @@ public class Display extends AppCompatActivity {
     Button view;
     FloatingActionButton floatingActionButton;
      Realm realm;
-    String state1,number;
+    String state1,number,store;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,31 +50,51 @@ public class Display extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                  save();
+                 //display();
+            }
+        });
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Display.this,view.class);
+                startActivity(intent);
+                display();
             }
         });
 
-       view.setOnClickListener(new View.OnClickListener() {
+
+       /*view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                save();
+                //save();
                RealmResults<Person> realmResults=realm.where(Person.class).findAll();
-
                 for(Person person: realmResults){
                     //String data=note.getText().toString();
                     //  i.putExtra("data",data);
-
                   // dt_display.setText("");
                    //dt_display.append(person.getFeedback());
-
-
                 }
                 Intent i = new Intent(Display.this,view.class);
-
                 startActivity(i);
-
             }
-        });
+        });*/
+    }
+
+    public void display(){
+
+        RealmResults<Person>  guests = realm.where(Person.class).findAll();
+
+        String op="";
+        realm.beginTransaction();
+        for(Person guest : guests){
+            op+=guest.toString();
+
+            Intent intent = new Intent(Display.this,view.class);
+            intent.putExtra("op",op);
+
+        }
+        // dt_display.setText(op);
+
     }
 
     public void save() {
@@ -88,12 +108,9 @@ public class Display extends AppCompatActivity {
                 Person Person = realm.createObject(Person.class,newkey);
                 Person.setFeedback(note.getText().toString());
                // Person.setState(state.getText().toString());
-               // Person.setName(cust_name.getText().toString());
+                //Person.setName(cust_name.getText().toString());
 
-                //String feedback=note.getText().toString();
-               // Intent intent2=new Intent(Display.this,view.class);
-                //intent2.putExtra("feedback",feedback);
-               //startActivity(intent2);
+
             }
         }, new Realm.Transaction.OnSuccess() {
             @Override

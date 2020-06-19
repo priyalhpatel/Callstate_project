@@ -13,25 +13,30 @@
         android:layout_height="wrap_content"
         android:queryHint="Search Contact"
         android:iconifiedByDefault="false"></SearchView>
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add"
+
+
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:src="@drawable/ic_add_black_24dp"
-        app:backgroundTint="#008577"
-        android:layout_marginRight="16dp"/>
-
-
+        android:layout_height="match_parent">
 
     <ListView
         android:id="@+id/contact_listview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
 
-
-
         ></ListView>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_add_black_24dp"
+        app:backgroundTint="#008577"
+        android:layout_margin="16dp"/>
+
+    </RelativeLayout>
 
 </LinearLayout>
