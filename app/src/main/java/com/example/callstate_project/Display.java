@@ -58,7 +58,7 @@ public class Display extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Display.this,view.class);
                 startActivity(intent);
-                display();
+
             }
         });
 
@@ -80,7 +80,7 @@ public class Display extends AppCompatActivity {
         });*/
     }
 
-    public void display(){
+   /* public void display(){
 
         RealmResults<Person>  guests = realm.where(Person.class).findAll();
 
@@ -95,7 +95,7 @@ public class Display extends AppCompatActivity {
         }
         // dt_display.setText(op);
 
-    }
+    }*/
 
     public void save() {
 
