@@ -8,8 +8,24 @@ public class Person extends RealmObject
     @PrimaryKey
     private int feedbackid;
    private String Feedback;
+   private  String Name;
+   private String State;
 
+    public String getName() {
+        return Name;
+    }
 
+    public void setName(String name) {
+        Name = name;
+    }
+
+    public String getState() {
+        return State;
+    }
+
+    public void setState(String state) {
+        State = state;
+    }
 
     public int getFeedbackid() {
         return feedbackid;

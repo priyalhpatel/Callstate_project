@@ -13,10 +13,10 @@ public class MyHelper {
     RealmResults<Person> person;
 
 
+
     public MyHelper(Realm realm) {
         this.realm = realm;
     }
-
     public void selectFromDB(){
 
         person = realm.where(Person.class).findAll();

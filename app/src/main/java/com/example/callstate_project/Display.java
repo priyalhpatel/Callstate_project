@@ -22,7 +22,7 @@ import io.realm.RealmResults;
 public class Display extends AppCompatActivity {
     EditText note;
     TextView dt_display,cust_name,state;
-    Button view;
+
     FloatingActionButton floatingActionButton;
      Realm realm;
     String state1,number,store;
@@ -34,7 +34,7 @@ public class Display extends AppCompatActivity {
 
           cust_name=findViewById(R.id.cust_name);
           state=findViewById(R.id.state);
-          view=findViewById(R.id.btn_view);
+
           note = findViewById(R.id.note);
          floatingActionButton = findViewById(R.id.fab);
 
@@ -53,14 +53,7 @@ public class Display extends AppCompatActivity {
                  //display();
             }
         });
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Display.this,view.class);
-                startActivity(intent);
 
-            }
-        });
 
 
        /*view.setOnClickListener(new View.OnClickListener() {
@@ -80,22 +73,7 @@ public class Display extends AppCompatActivity {
         });*/
     }
 
-   /* public void display(){
 
-        RealmResults<Person>  guests = realm.where(Person.class).findAll();
-
-        String op="";
-        realm.beginTransaction();
-        for(Person guest : guests){
-            op+=guest.toString();
-
-            Intent intent = new Intent(Display.this,view.class);
-            intent.putExtra("op",op);
-
-        }
-        // dt_display.setText(op);
-
-    }*/
 
     public void save() {
 
@@ -107,8 +85,8 @@ public class Display extends AppCompatActivity {
 
                 Person Person = realm.createObject(Person.class,newkey);
                 Person.setFeedback(note.getText().toString());
-               // Person.setState(state.getText().toString());
-                //Person.setName(cust_name.getText().toString());
+                Person.setState(state.getText().toString());
+                Person.setName(cust_name.getText().toString());
 
 
             }

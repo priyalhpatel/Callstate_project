@@ -27,6 +27,7 @@
             android:label="@string/Contactfetch">
 
 
+
         </activity>
         <activity android:name=".contactsave"
             android:label="@string/SaveContacts">
@@ -41,6 +42,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
 
         </activity>
         <receiver android:name=".CallReceiver">

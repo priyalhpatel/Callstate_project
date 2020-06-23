@@ -99,11 +99,7 @@
         android:layout_marginRight="30dp"
         app:backgroundTint="#008577"
         />
-    <Button
-        android:id="@+id/btn_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="view" />
+
 
 
 

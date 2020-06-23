@@ -32,12 +32,13 @@ public class view extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view);
 
+        realm = Realm.getDefaultInstance();
         rv = findViewById(R.id.rv);
 
         helper = new MyHelper(realm);
         helper.selectFromDB();
 
-        realm = Realm.getDefaultInstance();
+
         CustomAdapter adapter = new CustomAdapter( this, helper.justRefresh());
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(adapter);

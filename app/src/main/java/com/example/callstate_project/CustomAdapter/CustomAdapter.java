@@ -39,6 +39,8 @@ public class CustomAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
         Person p = people.get(position);
         holder.txtfeedback.setText(p.getFeedback());
+        holder.txtname.setText(p.getName());
+        holder.txtstate.setText(p.getState());
 
     }
 
