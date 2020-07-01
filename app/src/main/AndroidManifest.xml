@@ -16,7 +16,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".JsonContacts"></activity>
+        <activity android:name=".JsonContacts">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
         <activity android:name=".ContactApi.ContactApi">
 
         </activity>
@@ -29,11 +36,9 @@
         <activity
             android:name=".contactfetch"
             android:label="@string/Contactfetch" >
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+
+
         </activity>
 
         <activity
