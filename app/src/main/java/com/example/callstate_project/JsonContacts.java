@@ -4,7 +4,10 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentProviderOperation;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.View;
@@ -62,6 +65,8 @@ public class JsonContacts extends AppCompatActivity {
                 //  if(name.matches(name)||contact.matches(contact))
                 if(contacts.equals(name)|| contacts.equals(contact)|| contacts.equals(email)){
 
+
+                    // contactExists(Context ,contact);
                     Toast.makeText(JsonContacts.this,"Match",Toast.LENGTH_LONG).show();
 
                     final AlertDialog.Builder alert = new AlertDialog.Builder(JsonContacts.this);
@@ -157,5 +162,22 @@ public class JsonContacts extends AppCompatActivity {
         }
 
 
+    }
+
+    public boolean contactExists(Context context, String contact) {
+// number is the phone number
+        Uri lookupUri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(contact));
+
+        String[] mPhoneNumberProjection = {ContactsContract.PhoneLookup._ID, ContactsContract.PhoneLookup.NUMBER, ContactsContract.PhoneLookup.DISPLAY_NAME};
+        Cursor cur = context.getContentResolver().query(lookupUri, mPhoneNumberProjection, null, null, null);
+        try {
+            if (cur.moveToFirst()) {
+                return true;
+            }
+        } finally {
+            if (cur != null)
+                cur.close();
+        }
+        return false;
     }
 }
