@@ -22,13 +22,16 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+// To add contacts from json array
 public class JsonContacts extends AppCompatActivity {
 
     ListView listView;
     ArrayList<String> arrayList = new ArrayList<>();
     ArrayAdapter<String> arrayAdapter;
+    String alertDialog;
 
     String name="",contact="",email="",id="";
+    private Object background;
 
 
     @Override
@@ -38,6 +41,7 @@ public class JsonContacts extends AppCompatActivity {
 
         listView = findViewById(R.id.list_view);
 
+        //getting contact from json array
 
 
         String contacts = "{\"Contacts\":[{\"ID\":101,\"name\":\"Doe\",\"email\":\"John@gmail.com\",\"contact\":9876543200}," +
@@ -48,7 +52,33 @@ public class JsonContacts extends AppCompatActivity {
                 "{\"ID\":106,\"name\":\"Hoe\",\"email\":\"John@gmail.com\",\"contact\":9876543455},\n" +
                 "{\"ID\":107,\"name\":\"Ioe\",\"email\":\"John@gmail.com\",\"contact\":9876543200},\n" +
                 "{\"ID\":108,\"name\":\"Joe\",\"email\":\"John@gmail.com\",\"contact\":9876543201},\n" +
-                "{\"ID\":109,\"name\":\"Koe\",\"email\":\"John@gmail.com\",\"contact\":9873423201}]" + "}";
+                "{\"ID\":109,\"name\":\"Koe\",\"email\":\"John@gmail.com\",\"contact\":9873423202}]" + "}";
+
+
+        //AlertDialog box when contacts match
+        final AlertDialog.Builder alert = new AlertDialog.Builder(JsonContacts.this);
+        View mView = getLayoutInflater().inflate(R.layout.customdialog,null);
+        Button replace = (Button)mView.findViewById(R.id.replace);
+        Button newcontact = (Button)mView.findViewById(R.id.newcontact);
+
+        alert.setView(mView);
+        final AlertDialog alertDialog = alert.create();
+        alertDialog.setCanceledOnTouchOutside(false);
+
+        replace.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(JsonContacts.this,"Clicked",Toast.LENGTH_LONG).show();
+            }
+        });
+        newcontact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(JsonContacts.this,contactsave.class);
+                startActivity(intent);
+            }
+        });
 
 
         try {
@@ -62,43 +92,22 @@ public class JsonContacts extends AppCompatActivity {
                 contact = object.getString("contact");
 
 
-                //  if(name.matches(name)||contact.matches(contact))
-                if(contacts.equals(name)|| contacts.equals(contact)|| contacts.equals(email)){
+                // calling method to check existing contacts
+                boolean flag = contactExists(getApplicationContext(),contact,name,email);
+                if(flag){
 
-
-                    // contactExists(Context ,contact);
+                    // if contacts exist in phone book
                     Toast.makeText(JsonContacts.this,"Match",Toast.LENGTH_LONG).show();
 
-                    final AlertDialog.Builder alert = new AlertDialog.Builder(JsonContacts.this);
-                    View mView = getLayoutInflater().inflate(R.layout.customdialog,null);
-                    Button replace = (Button)mView.findViewById(R.id.replace);
-                    Button newcontact = (Button)mView.findViewById(R.id.newcontact);
-
-                    alert.setView(mView);
-                    final AlertDialog alertDialog = alert.create();
-                    alertDialog.setCanceledOnTouchOutside(false);
-
-                    replace.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Toast.makeText(JsonContacts.this,"Clicked",Toast.LENGTH_LONG).show();
-                        }
-                    });
-                    newcontact.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-
-                            Intent intent = new Intent(JsonContacts.this,contactsave.class);
-                            startActivity(intent);
-                        }
-                    });
+                    // to show the AlertDialog
                     alertDialog.show();
 
                 }
-                else{
+                else  {
+
+                    // to add new contacts if not exist
+                   alertDialog.dismiss();
                     Toast.makeText(JsonContacts.this,"Not match ",Toast.LENGTH_LONG).show();
-
-
 
                     ArrayList<ContentProviderOperation> ops =
                             new ArrayList<ContentProviderOperation>();
@@ -147,14 +156,6 @@ public class JsonContacts extends AppCompatActivity {
                     }
                 }
             }
-            // arrayList.add(id + ")"+name+"\n"+email+"\n"+contact);
-            //}
-       /* } catch (JSONException e) {
-            e.printStackTrace();
-        }*/
-            // arrayAdapter= new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,arrayList);
-
-            //  listView.setAdapter(arrayAdapter);
 
 
         }catch (JSONException e) {
@@ -164,14 +165,22 @@ public class JsonContacts extends AppCompatActivity {
 
     }
 
-    public boolean contactExists(Context context, String contact) {
-// number is the phone number
-        Uri lookupUri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(contact));
+    //method to check the existing contacts in phone book
+    public boolean contactExists(Context context, String contact, String name,String email) {
 
-        String[] mPhoneNumberProjection = {ContactsContract.PhoneLookup._ID, ContactsContract.PhoneLookup.NUMBER, ContactsContract.PhoneLookup.DISPLAY_NAME};
+        Uri lookupUri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(contact));
+        Uri lookup = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI,Uri.encode(name));
+        Uri look=Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI,Uri.encode(email));
+
+        String[] mPhoneNumberProjection = {ContactsContract.PhoneLookup._ID, ContactsContract.PhoneLookup.NUMBER, ContactsContract.PhoneLookup.DISPLAY_NAME,ContactsContract.PhoneLookup.DATA_ID};
         Cursor cur = context.getContentResolver().query(lookupUri, mPhoneNumberProjection, null, null, null);
+        Cursor cur1=context.getContentResolver().query(lookup,mPhoneNumberProjection,null,null,null);
+        Cursor cur2 = context.getContentResolver().query(look,mPhoneNumberProjection,null,null,null);
+
         try {
-            if (cur.moveToFirst()) {
+            if (cur.moveToFirst()||cur1.moveToNext()||cur2.moveToLast()) {
+
+
                 return true;
             }
         } finally {
@@ -180,4 +189,5 @@ public class JsonContacts extends AppCompatActivity {
         }
         return false;
     }
+
 }
