@@ -29,7 +29,7 @@ public class JsonContacts extends AppCompatActivity {
     ArrayList<String> arrayList = new ArrayList<>();
     ArrayAdapter<String> arrayAdapter;
     String alertDialog;
-
+    String Name="BB";
     String name="",contact="",email="",id="";
     private Object background;
 
@@ -44,15 +44,10 @@ public class JsonContacts extends AppCompatActivity {
         //getting contact from json array
 
 
-        String contacts = "{\"Contacts\":[{\"ID\":101,\"name\":\"Doe\",\"email\":\"John@gmail.com\",\"contact\":9876543200}," +
-                "{\"ID\":102,\"name\":\"Doe\",\"email\":\"John@gmail.com\",\"contact\":9874532201},\n" +
-                "{\"ID\":103,\"name\":\"Eoe\",\"email\":\"John@gmail.com\",\"contact\":9874563201},\n" +
-                "{\"ID\":104,\"name\":\"Foe\",\"email\":\"John@gmail.com\",\"contact\":9870987601},\n" +
-                "{\"ID\":105,\"name\":\"Goe\",\"email\":\"John@gmail.com\",\"contact\":9876543211},\n" +
-                "{\"ID\":106,\"name\":\"Hoe\",\"email\":\"John@gmail.com\",\"contact\":9876543455},\n" +
-                "{\"ID\":107,\"name\":\"Ioe\",\"email\":\"John@gmail.com\",\"contact\":9876543200},\n" +
-                "{\"ID\":108,\"name\":\"Joe\",\"email\":\"John@gmail.com\",\"contact\":9876543201},\n" +
-                "{\"ID\":109,\"name\":\"Koe\",\"email\":\"John@gmail.com\",\"contact\":9873423202}]" + "}";
+        String contacts = "{\"Contacts\":[{\"ID\":101,\"name\":\"DD\",\"email\":\"John@gmail.com\",\"contact\":9876543200}," +
+
+                "{\"ID\":108,\"name\":\"BB\",\"email\":\"John@gmail.com\",\"contact\":9876543201},\n" +
+                "{\"ID\":109,\"name\":\"CC\",\"email\":\"John@gmail.com\",\"contact\":9873423202}]" + "}";
 
 
         //AlertDialog box when contacts match
@@ -63,6 +58,7 @@ public class JsonContacts extends AppCompatActivity {
 
         alert.setView(mView);
         final AlertDialog alertDialog = alert.create();
+        alertDialog.setMessage("Duplicate" +" "+ Name + " "+  "contact exits");
         alertDialog.setCanceledOnTouchOutside(false);
 
         replace.setOnClickListener(new View.OnClickListener() {
@@ -98,7 +94,6 @@ public class JsonContacts extends AppCompatActivity {
 
                     // if contacts exist in phone book
                     Toast.makeText(JsonContacts.this,"Match",Toast.LENGTH_LONG).show();
-
                     // to show the AlertDialog
                     alertDialog.show();
 
@@ -107,7 +102,7 @@ public class JsonContacts extends AppCompatActivity {
 
                     // to add new contacts if not exist
                    alertDialog.dismiss();
-                    Toast.makeText(JsonContacts.this,"Not match ",Toast.LENGTH_LONG).show();
+                    Toast.makeText(JsonContacts.this,"Not match And Contacts Added ",Toast.LENGTH_LONG).show();
 
                     ArrayList<ContentProviderOperation> ops =
                             new ArrayList<ContentProviderOperation>();

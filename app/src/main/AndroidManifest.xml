@@ -16,7 +16,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".JsonContacts">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -44,7 +46,12 @@
         <activity
             android:name=".contactsave"
             android:label="@string/SaveContacts" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity">
+
+
+
+
+        </activity>
 
         <receiver android:name=".CallReceiver">
             <intent-filter>

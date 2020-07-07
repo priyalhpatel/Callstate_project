@@ -28,7 +28,7 @@ import static androidx.core.content.ContextCompat.getSystemService;
 
 public class CallReceiver extends BroadcastReceiver {
     TextView cust_name;
-    String p1="+919429704118";
+    String p1="+9194297041188";
     String p2="+919427960325";
     String p3="+919484507696";
     String p4="+919878472827";
@@ -70,6 +70,7 @@ public class CallReceiver extends BroadcastReceiver {
         Toast.makeText(context, "This is " +phone_number , Toast.LENGTH_SHORT).show();
 
 
+
         if(phone_number.equals(p1)|| phone_number.equals(p2) || phone_number.equals(p3) || phone_number.equals(p4)){
 
             Toast.makeText(context,"Match"+phone_number,Toast.LENGTH_LONG).show();
@@ -89,4 +90,5 @@ public class CallReceiver extends BroadcastReceiver {
             Toast.makeText(context,"notmatch"+phone_number,Toast.LENGTH_LONG).show();
         }
 
-    }}
+    }
+}

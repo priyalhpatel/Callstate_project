@@ -6,7 +6,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ALERT !! "
+     />/   android:text="ALERT !! "
         android:textAlignment="center"
         android:textSize="30dp"
         android:textColor="	#FF0000"
@@ -15,7 +15,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Contacts Are Matching With Exiting Contacts,Want To Create New or Replace ? "
+       />/ android:text="Contacts Are Matching With Exiting Contacts,Want To Create New or Replace ? "
         android:textSize="20dp"
         android:textAlignment="center"
         android:layout_marginTop="25dp"
