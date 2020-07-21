@@ -7,9 +7,11 @@ import android.content.ContentProviderOperation;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.OperationApplicationException;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.RemoteException;
 import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
@@ -49,7 +51,7 @@ public class JsonContacts extends AppCompatActivity {
 
         String contacts = "{\"Contacts\":[{\"ID\":101,\"name\":\"DD\",\"email\":\"John@gmail.com\",\"contact\":9876543200}," +
 
-                "{\"ID\":108,\"name\":\"BB\",\"email\":\"John@gmail.com\",\"contact\":9876543201},\n" +
+                "{\"ID\":108,\"name\":\"BB1\",\"email\":\"John@gmail.com\",\"contact\":9876543203},\n" +
                 "{\"ID\":109,\"name\":\"CC\",\"email\":\"John@gmail.com\",\"contact\":123}]" + "}";
 
 
@@ -94,11 +96,6 @@ public class JsonContacts extends AppCompatActivity {
                     alert.setView(mView);
                     final AlertDialog alertDialog = alert.create();
                     alertDialog.setMessage("Duplicate" +" "+ name + " "+contact+ "contact exits");
-
-                   /* Intent intent =new Intent();
-                    intent.putExtra("name",name);
-                    intent.putExtra("contact",contact);*/
-
                     alertDialog.setCanceledOnTouchOutside(false);
 
 
@@ -106,7 +103,7 @@ public class JsonContacts extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             alertDialog.dismiss();
-                            Toast.makeText(JsonContacts.this,"Clicked",Toast.LENGTH_LONG).show();
+                            Toast.makeText(JsonContacts.this,"contactReplaced",Toast.LENGTH_LONG).show();
 
                             final ArrayList<ContentProviderOperation> add =
                                     new ArrayList<ContentProviderOperation>();
@@ -117,33 +114,38 @@ public class JsonContacts extends AppCompatActivity {
                             String[] contactParams = new String[]{rawContactId,
                                     ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE};
 
-                            if (!name.isEmpty()) {
+
                                 add.add(android.content.ContentProviderOperation.newUpdate(
                                         android.provider.ContactsContract.Data.CONTENT_URI)
                                         .withSelection(where, nameParams)
                                         .withValue(ContactsContract.CommonDataKinds.StructuredName.DISPLAY_NAME,
                                                 name).build());
-                            }
 
-                            if (!contact.isEmpty()) {
+
                                 add.add(android.content.ContentProviderOperation.newUpdate(
                                         android.provider.ContactsContract.Data.CONTENT_URI)
                                         .withSelection(where, contactParams)
                                         .withValue(ContactsContract.CommonDataKinds.Phone.NUMBER, contact)
                                         .build());
+
+                            try {
+                                getContentResolver().applyBatch(ContactsContract.AUTHORITY, add);
+                            } catch (OperationApplicationException e) {
+                                e.printStackTrace();
+                            } catch (RemoteException e) {
+                                e.printStackTrace();
                             }
                         }
                     });
+
                     newcontact.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
 
+
                             ArrayList<ContentProviderOperation> add =
                                     new ArrayList<ContentProviderOperation>();
 
-                         /*   Intent intent = getIntent();
-                            intent.getStringExtra(name);
-                            intent.getStringExtra(contact);*/
 
                             add.add(ContentProviderOperation.newInsert(
                                     ContactsContract.RawContacts.CONTENT_URI)
@@ -156,21 +158,29 @@ public class JsonContacts extends AppCompatActivity {
                                         .withValueBackReference(ContactsContract.RawContacts.Data.RAW_CONTACT_ID, 0)
                                         .withValue(ContactsContract.RawContacts.Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE)
                                         .withValue(ContactsContract.CommonDataKinds.StructuredName.GIVEN_NAME, name)
-                                        .withValue(ContactsContract.CommonDataKinds.Phone.NUMBER, contact)
-                                        .withValue(ContactsContract.CommonDataKinds.Phone.TYPE, ContactsContract.CommonDataKinds.Phone.TYPE_MOBILE)
-
-                                        // .withValue(ContactsContract.CommonDataKinds.StructuredName.FAMILY_NAME, name)
                                         .build());
 
-                            Log.d("name","done"+contact);
-
-
-                             /*   add.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+                                  add.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
                                         .withValueBackReference(ContactsContract.RawContacts.Data.RAW_CONTACT_ID, 0)
                                         .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE)
                                         .withValue(ContactsContract.CommonDataKinds.Phone.NUMBER, contact)
                                         .withValue(ContactsContract.CommonDataKinds.Phone.TYPE, ContactsContract.CommonDataKinds.Phone.TYPE_MOBILE)
-                                        .build());*/
+                                        .build());
+
+
+                            try {
+                                getContentResolver().applyBatch(ContactsContract.AUTHORITY, add);
+                            } catch (OperationApplicationException e) {
+                                e.printStackTrace();
+                            } catch (RemoteException e) {
+                                e.printStackTrace();
+                            }
+
+
+                            Log.d("name","done"+contact);
+
+
+
 
 
                             alertDialog.dismiss();
@@ -185,8 +195,6 @@ public class JsonContacts extends AppCompatActivity {
                 }
                 else  {
 
-                    // to add new contacts if not exist
-                   // alertDialog.dismiss();
                     Toast.makeText(JsonContacts.this,"Not match And Contacts Added ",Toast.LENGTH_LONG).show();
 
                     ArrayList<ContentProviderOperation> ops =
